@@ -14,9 +14,10 @@ for (let i = 0; i < collisions.length; i += 70) {
 
 const battleZonesMap = []
 
-for (let i = 0; i < battleZones.length; i += 70) {
-    battleZonesMap.push(battleZones.slice(i, 70 + i));
+for (let i = 0; i < battleZonesData.length; i += 70) {
+    battleZonesMap.push(battleZonesData.slice(i, 70 + i));
 }
+
 
 const boundaries = []
 
@@ -38,6 +39,22 @@ collisionsMap.forEach((row, i) => {
     })
 })
 
+const battleZones = []
+
+battleZonesMap.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+        if (symbol === 1025)
+            battleZones.push(new Boundary({
+                position: {
+                    x: j * Boundary.width + offset.x,
+                    y: i * Boundary.height + offset.y
+                }
+            })
+            );
+    })
+})
+
+console.log(battleZones);
 
 const image = new Image();
 image.src = "./img/Pellet Town.png"
@@ -108,7 +125,7 @@ const keys = {
 }
 
 
-const movables = [background, ...boundaries, foreground]
+const movables = [background, ...boundaries, foreground, ...battleZones]
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (rectangle1.position.x + rectangle1.width >= rectangle2.position.x && rectangle1.position.x <= rectangle2.position.x + rectangle2.width && rectangle1.position.y <= rectangle2.position.y + rectangle2.height / 2 && rectangle1.position.y + rectangle1.height >= rectangle2.position.y)
@@ -119,10 +136,28 @@ function animate() {
     background.draw()
     boundaries.forEach(boundary => {
         boundary.draw()
-
+    })
+    battleZones.forEach(battleZone => {
+        battleZone.draw()
     })
     player.draw()
     foreground.draw()
+
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+        for (let i = 0; i < battleZones.length; i++) {
+            const battleZone = battleZones[i]
+            if (
+                rectangularCollision({
+                    rectangle1: player,
+                    rectangle2: battleZone
+                })
+            ) {
+                console.log("Battle");
+                break;
+            }
+        }
+    }
+
 
     let moving = true
     player.moving = false;
@@ -147,9 +182,12 @@ function animate() {
                 break;
             }
         }
+
+
+
         if (moving) {
             movables.forEach(movable => {
-                movable.position.y += 3
+                movable.position.y += 5
             })
         }
     }
