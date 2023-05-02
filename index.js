@@ -154,6 +154,10 @@ function animate() {
     let moving = true
     player.animate = false;
 
+    document.querySelector('.enemy-stats-bar').style.display = "none"
+    document.querySelector('.ally-stats-bar').style.display = "none"
+    document.querySelector('.battle-menu').style.display = "none"
+
 
     if (battle.initiated) return;
     // activate battle
@@ -316,7 +320,7 @@ function animate() {
 
 }
 
-// animate();
+animate();
 
 const battleBackgroundImage = new Image()
 battleBackgroundImage.src = './img/battleBackground.png'
@@ -368,10 +372,13 @@ function animateBattle() {
     battleBackground.draw()
     emby.draw()
     draggle.draw()
+    document.querySelector('.enemy-stats-bar').style.display = "block"
+    document.querySelector('.ally-stats-bar').style.display = "block"
+    document.querySelector('.battle-menu').style.display = "flex"
 }
 
 
-animateBattle()
+// animateBattle()
 
 let lastKey = ""
 window.addEventListener("keydown", (e) => {
