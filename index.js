@@ -316,7 +316,7 @@ function animate() {
 
 }
 
-// animate();
+animate();
 
 const battleBackgroundImage = new Image()
 battleBackgroundImage.src = './img/battleBackground.png'
@@ -371,7 +371,7 @@ function animateBattle() {
 }
 
 
-animateBattle()
+// animateBattle()
 
 let lastKey = ""
 window.addEventListener("keydown", (e) => {
