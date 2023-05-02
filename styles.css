@@ -1,4 +1,24 @@
+* {
+  font-family: "Press Start 2P", cursive;
+}
+
 body {
   background-color: #666;
   overflow: hidden;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+button {
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+button:hover {
+  background-color: #ccc;
 }
