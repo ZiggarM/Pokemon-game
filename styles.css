@@ -59,7 +59,7 @@ button:hover {
   top: 0px;
   left: 0;
   right: 0;
-  width: 50%;
+  width: 100%;
 }
 
 .enemy-stats-bar {
@@ -92,7 +92,7 @@ button:hover {
   top: 0px;
   left: 0;
   right: 0;
-  width: 80%;
+  width: 100%;
 }
 
 .enemy-name-lvl,
