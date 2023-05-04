@@ -56,7 +56,6 @@ battleZonesMap.forEach((row, i) => {
     })
 })
 
-console.log(battleZones);
 
 const image = new Image();
 image.src = "./img/Pellet Town.png"
@@ -154,9 +153,7 @@ function animate() {
     let moving = true
     player.animate = false;
 
-    document.querySelector('.enemy-stats-bar').style.display = "none"
-    document.querySelector('.ally-stats-bar').style.display = "none"
-    document.querySelector('.battle-menu').style.display = "none"
+
 
 
     if (battle.initiated) return;
@@ -189,6 +186,7 @@ function animate() {
                             opacity: 1,
                             duration: 0.4,
                             onComplete() {
+                                initBattle()
                                 animateBattle()
                             }
                         })
@@ -222,7 +220,7 @@ function animate() {
                     }
                 })
             ) {
-                console.log('coliding');
+
                 moving = false;
                 break;
             }
@@ -252,7 +250,7 @@ function animate() {
                     }
                 })
             ) {
-                console.log('coliding');
+
                 moving = false;
                 break;
             }
@@ -279,7 +277,7 @@ function animate() {
                     }
                 })
             ) {
-                console.log('coliding');
+
                 moving = false;
                 break;
             }
@@ -306,7 +304,7 @@ function animate() {
                     }
                 })
             ) {
-                console.log('coliding');
+
                 moving = false;
                 break;
             }
@@ -320,81 +318,9 @@ function animate() {
 
 }
 
-animate();
-
-const battleBackgroundImage = new Image()
-battleBackgroundImage.src = './img/battleBackground.png'
-const battleBackground = new Sprite({
-    position: {
-        x: 0,
-        y: 0
-    },
-    image: battleBackgroundImage,
-})
+// animate();
 
 
-const draggleImage = new Image()
-draggleImage.src = './img/draggleSprite.png'
-
-const draggle = new Sprite({
-    position: {
-        x: 800,
-        y: 100
-    },
-    image: draggleImage,
-    frames: {
-        max: 4,
-        hold: 40
-    },
-    animate: true,
-    isEnemy: true
-})
-
-
-const embyImage = new Image()
-embyImage.src = './img/embySprite.png'
-
-const emby = new Sprite({
-    position: {
-        x: 280,
-        y: 325
-    },
-    image: embyImage,
-    frames: {
-        max: 4,
-        hold: 40
-    },
-    animate: true
-})
-
-
-function animateBattle() {
-    window.requestAnimationFrame(animateBattle)
-    battleBackground.draw()
-    emby.draw()
-    draggle.draw()
-    document.querySelector('.enemy-stats-bar').style.display = "block"
-    document.querySelector('.ally-stats-bar').style.display = "block"
-    document.querySelector('.battle-menu').style.display = "flex"
-}
-
-
-// animateBattle()
-
-const attackBtn = document.querySelectorAll('.attack-btn')
-attackBtn.forEach(btn => {
-    btn.addEventListener('click', () => {
-        emby.attack({
-            attack: {
-                name: 'Tackle',
-                damage: 20,
-                type: 'Normal'
-            },
-            recipient: draggle
-        })
-        console.log("clicked");
-    })
-})
 
 let lastKey = ""
 window.addEventListener("keydown", (e) => {
